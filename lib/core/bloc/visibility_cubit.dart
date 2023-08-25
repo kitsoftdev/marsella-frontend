@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class VisibilityLiveCubit extends Cubit<VisibilityLiveState> {
   VisibilityLiveCubit()
-      : super(const VisibilityLiveState(false, false,));
+      : super(const VisibilityLiveState(true, false,));
 
   void showVisibility() {
     emit(state.copyWithVisibilityChance(visibility: true));

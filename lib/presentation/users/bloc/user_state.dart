@@ -24,11 +24,10 @@ class UserLoading extends UserState {}
 
 class UserLoaded extends UserState {
   final User user;
-  final OrgaUser orgaUser;
   final String message;
-  const UserLoaded(this.user, this.orgaUser, this.message);
+  const UserLoaded(this.user, this.message);
   @override
-  List<Object> get props => [user, orgaUser, message];
+  List<Object> get props => [user, message];
 }
 
 class UserListLoaded extends UserState {

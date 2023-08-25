@@ -608,7 +608,7 @@ class MarsellaIconTextButton extends StatelessWidget {
       onPressed: onPressed,
       style: ButtonStyle(
         padding:
-            MaterialStateProperty.all(EdgeInsets.only(left: 16.0, right: 16.0)),
+            MaterialStateProperty.all(const EdgeInsets.only(left: 15.0, right: 15.0)),
         shadowColor: MaterialStateProperty.all(Colors.transparent),
         minimumSize: MaterialStateProperty.all(
           const Size(78, 47),

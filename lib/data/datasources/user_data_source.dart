@@ -50,12 +50,12 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
     final url = Uri.parse(
         '${UrlBackend.base}/api/v1/user/byorga/$orgaId?sort=${json.encode(order)}&searchtext=$searchText&pageindex=$pageIndex&pagesize=$pageSize');
-    final session = await localDataSource.getSavedSession();
+    //final session = await localDataSource.getSavedSession();
 
     http.Response resp = await client.get(url, headers: {
       "Accept": "application/json",
       "Content-Type": "application/json",
-      "Authorization": "Bearer ${session.token}",
+      //"Authorization": "Bearer ${session.token}",
     }).timeout(const Duration(seconds: TimeOutConnection.timeOut), onTimeout: () {
       throw ConnectionException();
     });
@@ -106,12 +106,12 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   @override
   Future<UserModel> getUser(String userId) async {
     final url = Uri.parse('${UrlBackend.base}/api/v1/user/$userId');
-    final session = await localDataSource.getSavedSession();
+    //final session = await localDataSource.getSavedSession();
 
     http.Response resp = await client.get(url, headers: {
       "Accept": "application/json",
       "Content-Type": "application/json",
-      "Authorization": "Bearer ${session.token}",
+      //"Authorization": "Bearer ${session.token}",
     }).timeout(const Duration(seconds: TimeOutConnection.timeOut), onTimeout: () {
       throw ConnectionException();
     });
@@ -151,12 +151,12 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   @override
   Future<bool> deleteUser(String userId) async {
     final url = Uri.parse('${UrlBackend.base}/api/v1/user/$userId');
-    final session = await localDataSource.getSavedSession();
+    //final session = await localDataSource.getSavedSession();
 
     http.Response resp = await client.delete(url, headers: {
       "Accept": "application/json",
       "Content-Type": "application/json",
-      "Authorization": "Bearer ${session.token}",
+      //"Authorization": "Bearer ${session.token}",
     }).timeout(const Duration(seconds: TimeOutConnection.timeOut), onTimeout: () {
       throw ConnectionException();
     });
@@ -175,12 +175,12 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   Future<bool> enableUser(String userId, bool enableOrDisable) async {
     final url = Uri.parse(
         '${UrlBackend.base}/api/v1/user/enable/$userId?enable=${enableOrDisable.toString()}');
-    final session = await localDataSource.getSavedSession();
+    //final session = await localDataSource.getSavedSession();
 
     http.Response resp = await client.put(url, headers: {
       "Accept": "application/json",
       "Content-Type": "application/json",
-      "Authorization": "Bearer ${session.token}",
+      //"Authorization": "Bearer ${session.token}",
     }).timeout(const Duration(seconds: TimeOutConnection.timeOut), onTimeout: () {
       throw ConnectionException();
     });
@@ -198,13 +198,13 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   @override
   Future<UserModel> updateUser(String userId, UserModel user) async {
     final url = Uri.parse('${UrlBackend.base}/api/v1/user/$userId');
-    final session = await localDataSource.getSavedSession();
+    //final session = await localDataSource.getSavedSession();
 
     http.Response resp =
         await client.put(url, body: json.encode(user), headers: {
       "Accept": "application/json",
       "Content-Type": "application/json",
-      "Authorization": "Bearer ${session.token}",
+      //"Authorization": "Bearer ${session.token}",
     }).timeout(const Duration(seconds: TimeOutConnection.timeOut), onTimeout: () {
       throw ConnectionException();
     });
@@ -232,13 +232,13 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   @override
   Future<UserModel> updateProfile(String userId, UserModel user) async {
     final url = Uri.parse('${UrlBackend.base}/api/v1/user/profile/$userId');
-    final session = await localDataSource.getSavedSession();
+    //final session = await localDataSource.getSavedSession();
 
     http.Response resp =
         await client.put(url, body: json.encode(user), headers: {
       "Accept": "application/json",
       "Content-Type": "application/json",
-      "Authorization": "Bearer ${session.token}",
+      //"Authorization": "Bearer ${session.token}",
     }).timeout(const Duration(seconds: TimeOutConnection.timeOut), onTimeout: () {
       throw ConnectionException();
     });
@@ -339,11 +339,11 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     //parsea URL
     final url = Uri.parse(
         '${UrlBackend.base}/api/v1/user/notinorga/$orgaId?sort=${json.encode(order)}&searchtext=$searchText&pageindex=$pageIndex&pagesize=$pageSize');
-    final session = await localDataSource.getSavedSession();
+    //final session = await localDataSource.getSavedSession();
     http.Response resp = await client.get(url, headers: {
       "Accept": "application/json",
       "Content-Type": "application/json",
-      "Authorization": "Bearer ${session.token}",
+      //"Authorization": "Bearer ${session.token}",
     }).timeout(const Duration(seconds: TimeOutConnection.timeOut), onTimeout: () {
       throw ConnectionException();
     });
@@ -391,13 +391,13 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   Future<bool> updateUserPassword(String userId, String password) async {
     final Map<String, dynamic> passData = {'password': password};
     final url = Uri.parse('${UrlBackend.base}/api/v1/password/$userId');
-    final session = await localDataSource.getSavedSession();
+    //final session = await localDataSource.getSavedSession();
 
     http.Response resp =
         await client.put(url, body: json.encode(passData), headers: {
       "Accept": "application/json",
       "Content-Type": "application/json",
-      "Authorization": "Bearer ${session.token}",
+      //"Authorization": "Bearer ${session.token}",
     }).timeout(const Duration(seconds: TimeOutConnection.timeOut), onTimeout: () {
       throw ConnectionException();
     });

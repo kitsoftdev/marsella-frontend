@@ -83,7 +83,7 @@ class _MarsellaApp extends State<MarsellaApp> {
       child: MaterialApp(
         title: 'Marsella.com',
         home: Builder(builder: (context) {
-          context.read<SessionLiveCubit>().readSession();
+          //context.read<SessionLiveCubit>().readSession();
           final shThemeDataAll = MarsellaTheme.of(context);
           return BlocListener<ConnectivityLiveCubit, ConnectivityLiveState>(
             listener: (context, state) {
@@ -94,7 +94,7 @@ class _MarsellaApp extends State<MarsellaApp> {
             },
             child: BlocListener<SessionLiveCubit, SessionLiveState>(
               listener: (context, statecubit) {
-                if (context.read<SessionLiveCubit>().timeCancel) {
+                /*if (context.read<SessionLiveCubit>().timeCancel) {
                   snackBarNotify(context, 'Sesión cerrada automáticamente',
                       Icons.exit_to_app);
                   context
@@ -103,7 +103,7 @@ class _MarsellaApp extends State<MarsellaApp> {
                   context.read<SessionLiveCubit>().logoff();
                   BlocProvider.of<NavBloc>(context)
                       .add(NavigateTo(NavItem.pageUsers, context, null));
-                }
+                }*/
               },
               child: Container(
                   decoration: BoxDecoration(

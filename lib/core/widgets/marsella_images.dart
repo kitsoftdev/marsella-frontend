@@ -18,11 +18,7 @@ class MarsellaSideMenuLargeLogo extends StatelessWidget {
       imageLocation = 'assets/marsella_large_logo_dark.png';
     }
 
-    return Image.asset(
-      imageLocation,
-      width: 200,
-      height: 48,
-    );
+    return const SizedBox();
   }
 }
 
@@ -43,10 +39,6 @@ class MarsellaSideMenuLargeWormLogo extends StatelessWidget {
       imageLocation = 'assets/marsella_large_logo_dark_worm.png';
     }
 
-    return Image.asset(
-      imageLocation,
-      width: 35,
-      height: 48,
-    );
+    return const SizedBox();
   }
 }
