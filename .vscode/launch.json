@@ -1,0 +1,29 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "LOCAL Debug",
+            "program": "lib/main.dart",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "DISEÑO debug",
+            "program": "lib/design.dart",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "FEAT DIEGO debug",
+            "program": "lib/main.dart",
+            "request": "launch",
+            "type": "dart",
+			"args":[
+				"--dart-define=API_BASE_URL=https://sharmia-features-DIEGO-backend.azurewebsites.net"
+			]
+        },
+    ]
+}

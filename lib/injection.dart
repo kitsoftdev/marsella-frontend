@@ -35,7 +35,6 @@ import 'data/repositories/user_repository_impl.dart';
 import 'domain/repositories/local_repository.dart';
 import 'domain/repositories/login_repository.dart';
 import 'domain/repositories/setting_repository.dart';
-import 'domain/repositories/storage_repository.dart';
 import 'domain/repositories/user_repository.dart';
 import 'domain/usecases/local/get_has_login.dart';
 import 'domain/usecases/local/get_session_role.dart';
@@ -108,7 +107,7 @@ Future<void> init() async {
   locator.registerFactory(() => ScrollLiveCubit());
 
   // usecase
-  locator.registerLazySingleton(() => UpdateUserPassword(locator()));
+  /*locator.registerLazySingleton(() => UpdateUserPassword(locator()));
   locator.registerLazySingleton(() => UpdateProfilePassword(locator()));
   locator.registerLazySingleton(() => GetAuthenticate(locator()));
   locator.registerLazySingleton(() => GetHasLogIn(locator()));
@@ -117,9 +116,9 @@ Future<void> init() async {
   locator.registerLazySingleton(() => GetSideOptions(locator()));
   locator.registerLazySingleton(() => DoLogOff(locator()));
   locator.registerLazySingleton(() => RegisterUser(locator()));
-  locator.registerLazySingleton(() => ChangeOrga(locator()));
+  locator.registerLazySingleton(() => ChangeOrga(locator()));*/
 
-  locator.registerLazySingleton(() => AddOrga(locator()));
+  /*locator.registerLazySingleton(() => AddOrga(locator()));
   locator.registerLazySingleton(() => AddOrgaUser(locator()));
   locator.registerLazySingleton(() => DeleteOrga(locator()));
   locator.registerLazySingleton(() => DeleteOrgaUser(locator()));
@@ -132,7 +131,7 @@ Future<void> init() async {
   locator.registerLazySingleton(() => UpdateOrga(locator()));
   locator.registerLazySingleton(() => ExistsOrga(locator()));
   locator.registerLazySingleton(() => UpdateOrgaUser(locator()));
-  locator.registerLazySingleton(() => GetOrgasByUser(locator()));
+  locator.registerLazySingleton(() => GetOrgasByUser(locator()));*/
 
   locator.registerLazySingleton(() => AddUser(locator()));
   locator.registerLazySingleton(() => DeleteUser(locator()));
@@ -146,12 +145,12 @@ Future<void> init() async {
   locator.registerLazySingleton(() => GetUsersNotInOrga(locator()));
   locator.registerLazySingleton(() => GetAuthenticateGoogle(locator()));
 
-  locator.registerLazySingleton(() => GetSettingSuper(locator()));
+  /*locator.registerLazySingleton(() => GetSettingSuper(locator()));
   locator.registerLazySingleton(() => GetSettingAdmin(locator()));
   locator.registerLazySingleton(() => UpdatedSettingSuper(locator()));
-  locator.registerLazySingleton(() => UpdatedSettingAdmin(locator()));
+  locator.registerLazySingleton(() => UpdatedSettingAdmin(locator()));*/
 
-  locator.registerLazySingleton(() => ReadIfRedirectLogin(locator()));
+  /*locator.registerLazySingleton(() => ReadIfRedirectLogin(locator()));
   locator.registerLazySingleton(() => StartRedirectLogin(locator()));
 
   locator.registerLazySingleton(() => UploadFile(locator()));
@@ -159,7 +158,7 @@ Future<void> init() async {
   locator.registerLazySingleton(() => GetCloudFile(locator()));
   locator.registerLazySingleton(() => RegisterCloudFile(locator()));
   locator.registerLazySingleton(() => RegisterCloudFileProfile(locator()));
-  locator.registerLazySingleton(() => UploadFileExternalUri(locator()));
+  locator.registerLazySingleton(() => UploadFileExternalUri(locator()));*/
 
   locator.registerLazySingleton(() => GetLocalValue(locator()));
   locator.registerLazySingleton(() => SetLocalValue(locator()));
