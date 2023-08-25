@@ -1,0 +1,145 @@
+import 'package:jwt_decode/jwt_decode.dart';
+
+///Clase con validaciones que utiliza el sistema.
+class Validators {
+  ///Validación de email.
+  ///
+  ///Debe no ser vacío y cumplir con el patrón de correo electrónico.
+  static String? validateEmail(String email) {
+    if (email.isEmpty) {
+      return "Campo Requerido";
+    }
+
+    if (email.length > 255) {
+      return "Por favor ingresa una email con menos de 255 caracteres";
+    }
+
+    String pattern =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+
+    RegExp regExp = RegExp(pattern);
+
+    if (!regExp.hasMatch(email)) {
+      return "Por favor ingresa un email válido";
+    }
+
+    return null;
+  }
+
+  static String? validateUsername(String username) {
+    if (username.isEmpty) {
+      return "Campo Requerido";
+    }
+
+    if (username.length > 30) {
+      return "Por favor ingresa un usuario con menos de 30 caracteres";
+    }
+
+    return null;
+  }
+
+  ///Validación de password
+  ///
+  ///Debe no ser vacío y cumplir con un largo mínimo.
+  static String? validatePassword(String password) {
+    if (password.isEmpty) {
+      return "Campo Requerido";
+    }
+
+    if (password.length < 4) {
+      return "Por favor ingresa una contraseña de al menos 4 caracteres";
+    }
+
+    if (password.length > 30) {
+      return "Por favor ingresa una contraseña con menos de 30 caracteres";
+    }
+
+    return null;
+  }
+
+  ///Validación de name
+  ///
+  ///Debe no ser vacío y cumplir con un largo mínimo.
+  static String? validateName(String name) {
+    if (name.isEmpty) {
+      return "Campo Requerido";
+    }
+
+    if (name.length < 4) {
+      return "Por favor ingrese minimo 4 caracteres";
+    }
+
+    if (name.length > 255) {
+      return "Por favor ingresa un nombre con menos de 255 caracteres";
+    }
+    return null;
+  }
+
+  static String? validateCode(String code) {
+    if (code.isEmpty) {
+      return "Campo Requerido";
+    }
+
+    if (code.length > 30) {
+      return "Por favor ingresa un codigo con menos de 30 caracteres";
+    }
+
+    return null;
+  }
+
+  static String? validatePasswordEqual(String repeatpassword, String password) {
+    if (repeatpassword.isEmpty) {
+      return "Campo Requerido";
+    }
+
+    if (repeatpassword.length < 4) {
+      return "Por favor ingresa una contraseña de al menos 4 caracteres";
+    }
+
+    if (repeatpassword != password) {
+      return "Por favor ingresa una contraseña igual a la password anterior";
+    }
+
+    return null;
+  }
+
+  ///Validación de token de usuario.
+  ///
+  ///Debe no ser vacío, estar vigente (no expirado) y contener la clave "userId"
+  static bool validateToken(String token) {
+    if (token == "") return false;
+    if (Jwt.isExpired(token)) return false;
+
+    final payload = Jwt.parseJwt(token);
+    if (payload.containsKey("userId")) {
+      return true;
+    }
+
+    return false;
+  }
+
+  static String? validateUrl(String url) {
+    if (url.isEmpty) {
+      return "Campo Requerido";
+    }
+
+    if (url.length > 3000) {
+      return "Por favor ingresa una url con menos de 3000 caracteres";
+    }
+
+    if (!(Uri.tryParse(url)?.hasAbsolutePath ?? false)) {
+      return "Por favor ingresa una url válida";
+    }
+
+    return null;
+  }
+
+  static String? validateTag(String tag, List<String> tags) {
+    if (tag.length > 30) {
+      return "Por favor ingresa un tag con menos de 30 caracteres";
+    }
+    if (tags.contains(tag)) {
+      return 'El tag ya existe';
+    }
+  }
+}
