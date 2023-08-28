@@ -5,17 +5,17 @@ class MarsellaColors extends Color {
   MarsellaColors(int value) : super(value);
 
   static Color get marsellaGreen =>
-      Color(int.parse("#7BFF11".substring(1, 7), radix: 16) + 0xFF000000);
+      Color(int.parse("#48ACF0".substring(1, 7), radix: 16) + 0xFF000000);
   static Color get marsellaGreenBackground =>
-      Color(int.parse("#F1FFEC".substring(1, 7), radix: 16) + 0xFF000000);
+      Color(int.parse("#C8E6FA".substring(1, 7), radix: 16) + 0xFF000000);
   static Color get marsellaDarkGreen =>
-      Color(int.parse("#417618".substring(1, 7), radix: 16) + 0xFF000000);
+      Color(int.parse("#133C55".substring(1, 7), radix: 16) + 0xFF000000);
   static Color get marsellaBlack =>
       Color(int.parse("#202020".substring(1, 7), radix: 16) + 0xFF000000);
   static Color get marsellaBlack50 =>
       Color(int.parse("#808080".substring(1, 7), radix: 16) + 0xFF000000);
   static Color get marsellaMediumGreen =>
-      Color(int.parse("#5AAA1C".substring(1, 7), radix: 16) + 0xFF000000);
+      Color(int.parse("#1F68A9".substring(1, 7), radix: 16) + 0xFF000000);
   static Color get marsellaBlack20 =>
       Color(int.parse("#CCCCCC".substring(1, 7), radix: 16) + 0xFF000000);
   static Color get marsellaWhite =>
@@ -27,7 +27,7 @@ class MarsellaColors extends Color {
   static Color get marsellaBlack80 =>
       Color(int.parse("#4D4D4D".substring(1, 7), radix: 16) + 0xFF000000);
   static Color get marsellaGreenLight =>
-      Color(int.parse("#DFFFC5".substring(1, 7), radix: 16) + 0xFF000000);
+      Color(int.parse("#91CDF6".substring(1, 7), radix: 16) + 0xFF000000);
   static Color get marsellaBlack90 =>
       Color(int.parse("#363636".substring(1, 7), radix: 16) + 0xFF000000);
   static Color get marsellaUltraBlack =>
@@ -46,7 +46,6 @@ class MarsellaColors extends Color {
       Color(int.parse("#5E9B2F".substring(1, 7), radix: 16) + 0xFF000000);
   static Color get marsellaRedLight =>
       Color(int.parse("#FFC5C5".substring(1, 7), radix: 16) + 0xFF000000);
-
   static Color get marsellaBlueBackground =>
       Color(int.parse("#ECF6FF".substring(1, 7), radix: 16) + 0xFF000000);
   static Color get marsellaYellowBackground =>
