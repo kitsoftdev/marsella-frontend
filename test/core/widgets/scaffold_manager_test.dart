@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import 'package:lomba_frontend/core/widgets/scaffold_manager.dart';
-import 'package:lomba_frontend/presentation/sidedrawer/bloc/sidedrawer_bloc.dart';
-import 'package:lomba_frontend/presentation/sidedrawer/bloc/sidedrawer_event.dart';
-import 'package:lomba_frontend/presentation/sidedrawer/bloc/sidedrawer_state.dart';
+import 'package:marsellafrontend/core/widgets/scaffold_manager.dart';
+import 'package:marsellafrontend/presentation/sidedrawer/bloc/sidedrawer_bloc.dart';
+import 'package:marsellafrontend/presentation/sidedrawer/bloc/sidedrawer_event.dart';
+import 'package:marsellafrontend/presentation/sidedrawer/bloc/sidedrawer_state.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockSideDrawerBloc extends MockBloc<SideDrawerEvent, SideDrawerState>

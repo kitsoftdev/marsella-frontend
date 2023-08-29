@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:lomba_frontend/domain/entities/user.dart';
-import 'package:lomba_frontend/presentation/users/bloc/user_event.dart';
-import 'package:lomba_frontend/presentation/users/bloc/user_state.dart';
+import 'package:marsellafrontend/domain/entities/user.dart';
+import 'package:marsellafrontend/presentation/users/bloc/user_event.dart';
+import 'package:marsellafrontend/presentation/users/bloc/user_state.dart';
 
 void main() {
   const tUser = User(
@@ -10,7 +10,11 @@ void main() {
       username: 'test',
       email: 'te@mp.com',
       enabled: true,
-      builtIn: false);
+      builtIn: false,
+      pictureUrl: null,
+      pictureCloudFileId: null,
+      pictureThumbnailUrl: null,
+      pictureThumbnailCloudFileId: null,);
 
   const tOnUserLoad = OnUserLoad('');
   const t_OnUserLoad = OnUserLoad('');
@@ -28,8 +32,8 @@ void main() {
       OnUserValidateEdit('', '', '', UserEditing(true, true, tUser));
   final t_OnUserValidateEdit =
       OnUserValidateEdit('', '', '', UserEditing(true, true, tUser));
-  const tOnUserEdit = OnUserEdit('', '', '', '', true);
-  const t_OnUserEdit = OnUserEdit('', '', '', '', true);
+  const tOnUserEdit = OnUserEdit('', '', '', '', true, tUser);
+  const t_OnUserEdit = OnUserEdit('', '', '', '', true, tUser);
   const tOnUserEnable = OnUserEnable('', true, '');
   const t_OnUserEnable = OnUserEnable('', true, '');
   const tOnUserDelete = OnUserDelete('', '');

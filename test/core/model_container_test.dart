@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:lomba_frontend/core/model_container.dart';
+import 'package:marsellafrontend/core/model_container.dart';
 
 void main() {
   test('ModelContainer', () {

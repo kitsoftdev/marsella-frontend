@@ -2,29 +2,29 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_guid/flutter_guid.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:lomba_frontend/core/constants.dart';
-import 'package:lomba_frontend/core/model_container.dart';
-import 'package:lomba_frontend/data/models/session_model.dart';
-import 'package:lomba_frontend/domain/entities/orgauser.dart';
-import 'package:lomba_frontend/domain/entities/user.dart';
-import 'package:lomba_frontend/domain/usecases/local/get_session_status.dart';
-import 'package:lomba_frontend/domain/usecases/login/register_user.dart';
-import 'package:lomba_frontend/domain/usecases/orgas/add_orgauser.dart';
-import 'package:lomba_frontend/domain/usecases/orgas/delete_orgauser.dart';
-import 'package:lomba_frontend/domain/usecases/orgas/get_orgauser.dart';
-import 'package:lomba_frontend/domain/usecases/orgas/update_orgauser.dart';
-import 'package:lomba_frontend/domain/usecases/users/get_users_notin_orga.dart';
-import 'package:lomba_frontend/domain/usecases/users/add_user.dart';
-import 'package:lomba_frontend/domain/usecases/users/delete_user.dart';
-import 'package:lomba_frontend/domain/usecases/users/enable_user.dart';
-import 'package:lomba_frontend/domain/usecases/users/exists_user.dart';
-import 'package:lomba_frontend/domain/usecases/users/get_user.dart';
-import 'package:lomba_frontend/domain/usecases/users/get_users.dart';
-import 'package:lomba_frontend/domain/usecases/users/update_user.dart';
-import 'package:lomba_frontend/domain/usecases/users/update_user_password.dart';
-import 'package:lomba_frontend/presentation/users/bloc/user_bloc.dart';
-import 'package:lomba_frontend/presentation/users/bloc/user_event.dart';
-import 'package:lomba_frontend/presentation/users/bloc/user_state.dart';
+import 'package:marsellafrontend/core/constants.dart';
+import 'package:marsellafrontend/core/model_container.dart';
+import 'package:marsellafrontend/data/models/session_model.dart';
+import 'package:marsellafrontend/domain/entities/orgauser.dart';
+import 'package:marsellafrontend/domain/entities/user.dart';
+import 'package:marsellafrontend/domain/usecases/local/get_session_status.dart';
+import 'package:marsellafrontend/domain/usecases/login/register_user.dart';
+import 'package:marsellafrontend/domain/usecases/orgas/add_orgauser.dart';
+import 'package:marsellafrontend/domain/usecases/orgas/delete_orgauser.dart';
+import 'package:marsellafrontend/domain/usecases/orgas/get_orgauser.dart';
+import 'package:marsellafrontend/domain/usecases/orgas/update_orgauser.dart';
+import 'package:marsellafrontend/domain/usecases/users/get_users_notin_orga.dart';
+import 'package:marsellafrontend/domain/usecases/users/add_user.dart';
+import 'package:marsellafrontend/domain/usecases/users/delete_user.dart';
+import 'package:marsellafrontend/domain/usecases/users/enable_user.dart';
+import 'package:marsellafrontend/domain/usecases/users/exists_user.dart';
+import 'package:marsellafrontend/domain/usecases/users/get_user.dart';
+import 'package:marsellafrontend/domain/usecases/users/get_users.dart';
+import 'package:marsellafrontend/domain/usecases/users/update_user.dart';
+import 'package:marsellafrontend/domain/usecases/users/update_user_password.dart';
+import 'package:marsellafrontend/presentation/users/bloc/user_bloc.dart';
+import 'package:marsellafrontend/presentation/users/bloc/user_event.dart';
+import 'package:marsellafrontend/presentation/users/bloc/user_state.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
@@ -111,7 +111,11 @@ Future<void> main() async {
       username: 'test',
       email: 'te@mp.com',
       enabled: true,
-      builtIn: false);
+      builtIn: false,
+      pictureUrl: null,
+      pictureCloudFileId: null,
+      pictureThumbnailUrl: null,
+      pictureThumbnailCloudFileId: null);
 
   const tOrgaUser = OrgaUser(
       userId: '1', orgaId: '1', roles: [], enabled: false, builtIn: false);
@@ -173,7 +177,7 @@ Future<void> main() async {
       wait: const Duration(milliseconds: 500),
       expect: () => [
         UserLoading(),
-        const UserLoaded(tUser, tOrgaUser, ''),
+        const UserLoaded(tUser, ''),
       ],
       verify: (bloc) {
         verify(mockGetUser.execute('1'));
@@ -251,7 +255,7 @@ Future<void> main() async {
       wait: const Duration(milliseconds: 500),
       expect: () => [
         UserLoading(),
-        const UserLoaded(tUser, tOrgaUser, " El usuario user fue deshabilitado")
+        const UserLoaded(tUser, " El usuario user fue deshabilitado")
       ],
       verify: (bloc) {
         verify(mockEnableUser.execute('1', false));
@@ -267,7 +271,7 @@ Future<void> main() async {
         return userBloc;
       },
       act: (bloc) => bloc.add(OnUserEdit(
-          '1', tUser.name, tUser.username, tUser.email, tUser.enabled)),
+          '1', tUser.name, tUser.username, tUser.email, tUser.enabled, tUser)),
       wait: const Duration(milliseconds: 500),
       expect: () => [
         UserLoading(),
@@ -307,7 +311,7 @@ Future<void> main() async {
       wait: const Duration(milliseconds: 500),
       expect: () => [
         UserLoading(),
-        const UserLoaded(tUser, tOrgaUser, " Contraseña Modificada")
+        const UserLoaded(tUser, " Contraseña Modificada")
       ],
       verify: (bloc) {
         verify(mockUpdateUserPassword.execute('1', '1234'));

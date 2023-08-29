@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import 'package:lomba_frontend/core/fakedata.dart';
-import 'package:lomba_frontend/presentation/users/bloc/user_bloc.dart';
-import 'package:lomba_frontend/presentation/users/bloc/user_event.dart';
-import 'package:lomba_frontend/presentation/users/bloc/user_state.dart';
-import 'package:lomba_frontend/presentation/users/pages/users_page.dart';
+import 'package:marsellafrontend/core/fakedata.dart';
+import 'package:marsellafrontend/presentation/users/bloc/user_bloc.dart';
+import 'package:marsellafrontend/presentation/users/bloc/user_event.dart';
+import 'package:marsellafrontend/presentation/users/bloc/user_state.dart';
+import 'package:marsellafrontend/presentation/users/pages/users_page.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockUserBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
@@ -89,7 +89,7 @@ void main() {
       (WidgetTester tester) async {
         // arrange
         when(() => mockUserBloc.state)
-            .thenReturn(UserLoaded(tUser2, tOrgaUser, ""));
+            .thenReturn(UserLoaded(tUser2, ""));
 
         // act
         await tester.pumpWidget(makeTestableWidget(UsersPage()));
@@ -103,7 +103,7 @@ void main() {
       'Mostrar boton de agregar',
       (WidgetTester tester) async {
         when(() => mockUserBloc.state)
-            .thenReturn(UserLoaded(tUser2, tOrgaUser, ""));
+            .thenReturn(UserLoaded(tUser2, ""));
         when(() => mockUserBloc.state).thenReturn(const UserStart(""));
         await tester.pumpWidget(makeTestableWidget(UsersPage()));
         Finder addButton = find.byKey(const ValueKey('btnAddOption'));
@@ -120,7 +120,7 @@ void main() {
       'Mostrar boton de editar',
       (WidgetTester tester) async {
         when(() => mockUserBloc.state)
-            .thenReturn(UserLoaded(tUser2, tOrgaUser, ""));
+            .thenReturn(UserLoaded(tUser2, ""));
         await tester.pumpWidget(makeTestableWidget(UsersPage()));
         Finder editButton = find.byKey(const ValueKey('btnEditOption'));
         await tester.tap(editButton);
@@ -134,7 +134,7 @@ void main() {
         (WidgetTester tester) async {
       // arrange
       when(() => mockUserBloc.state)
-          .thenReturn(UserLoaded(tUser2, tOrgaUser, ""));
+          .thenReturn(UserLoaded(tUser2, ""));
 
       // act
       await tester.pumpWidget(makeTestableWidget(UsersPage()));
@@ -154,7 +154,7 @@ void main() {
         (WidgetTester tester) async {
       // arrange
       when(() => mockUserBloc.state)
-          .thenReturn(UserLoaded(tUser2, tListOrgaUser[0], ""));
+          .thenReturn(UserLoaded(tUser2, ""));
 
       // act
       await tester.pumpWidget(makeTestableWidget(UsersPage()));
@@ -174,7 +174,7 @@ void main() {
         (WidgetTester tester) async {
       // arrange
       when(() => mockUserBloc.state)
-          .thenReturn(UserLoaded(tUser2, tOrgaUser, ""));
+          .thenReturn(UserLoaded(tUser2, ""));
 
       // act
       await tester.pumpWidget(makeTestableWidget(UsersPage()));
@@ -195,7 +195,7 @@ void main() {
         (WidgetTester tester) async {
       // arrange
       when(() => mockUserBloc.state)
-          .thenReturn(UserLoaded(tUser2, tOrgaUser, ""));
+          .thenReturn(UserLoaded(tUser2, ""));
 
       // act
       await tester.pumpWidget(makeTestableWidget(UsersPage()));
@@ -265,7 +265,7 @@ void main() {
     'Mostrar boton de cambiar password',
     (WidgetTester tester) async {
       when(() => mockUserBloc.state)
-          .thenReturn(UserLoaded(tUser2, tOrgaUser, ""));
+          .thenReturn(UserLoaded(tUser2, ""));
       await tester.pumpWidget(makeTestableWidget(UsersPage()));
       Finder editButton =
           find.byKey(const ValueKey('btnViewModifyPasswordFormOption'));
@@ -279,7 +279,7 @@ void main() {
     'Mostrar boton de volver',
     (WidgetTester tester) async {
       when(() => mockUserBloc.state)
-          .thenReturn(UserLoaded(tUser2, tOrgaUser, ""));
+          .thenReturn(UserLoaded(tUser2, ""));
       await tester.pumpWidget(makeTestableWidget(UsersPage()));
       Finder backButton = find.byKey(const ValueKey('btnVolver'));
       await tester.tap(backButton);

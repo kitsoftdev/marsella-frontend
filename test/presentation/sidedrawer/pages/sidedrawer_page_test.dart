@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import 'package:lomba_frontend/presentation/sidedrawer/bloc/sidedrawer_bloc.dart';
-import 'package:lomba_frontend/presentation/sidedrawer/bloc/sidedrawer_event.dart';
-import 'package:lomba_frontend/presentation/sidedrawer/bloc/sidedrawer_state.dart';
-import 'package:lomba_frontend/presentation/sidedrawer/pages/sidedrawer_page.dart';
+import 'package:marsellafrontend/presentation/sidedrawer/bloc/sidedrawer_bloc.dart';
+import 'package:marsellafrontend/presentation/sidedrawer/bloc/sidedrawer_event.dart';
+import 'package:marsellafrontend/presentation/sidedrawer/bloc/sidedrawer_state.dart';
+import 'package:marsellafrontend/presentation/sidedrawer/pages/sidedrawer_page.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockSideDrawerBloc extends MockBloc<SideDrawerEvent, SideDrawerState>
@@ -58,7 +58,7 @@ void main() {
       when(() => mockSideDrawerBloc.state).thenReturn(SideDrawerEmpty());
 
       //act
-      await tester.pumpWidget(makeTestableWidget(const SideDrawer()));
+      await tester.pumpWidget(makeTestableWidget(SideDrawer()));
       final snipper = find.byType(CircularProgressIndicator);
 
       //assert
@@ -69,10 +69,10 @@ void main() {
         (WidgetTester tester) async {
       //arrange
       when(() => mockSideDrawerBloc.state)
-          .thenReturn(const SideDrawerReady(listAnonymous, [], ''));
+          .thenReturn(const SideDrawerReady(listAnonymous, [], null, false, false, null));
 
       //act
-      await tester.pumpWidget(makeTestableWidget(const SideDrawer()));
+      await tester.pumpWidget(makeTestableWidget(SideDrawer()));
 
       //assert
       expect(find.text("Home"), findsOneWidget);
@@ -83,10 +83,10 @@ void main() {
         (WidgetTester tester) async {
       //arrange
       when(() => mockSideDrawerBloc.state)
-          .thenReturn(const SideDrawerReady(listUser, [], ''));
+          .thenReturn(const SideDrawerReady(listUser, [], null, false, false, null));
 
       //act
-      await tester.pumpWidget(makeTestableWidget(const SideDrawer()));
+      await tester.pumpWidget(makeTestableWidget(SideDrawer()));
 
       //assert
       expect(find.text("Home"), findsOneWidget);
@@ -98,10 +98,10 @@ void main() {
         (WidgetTester tester) async {
       //arrange
       when(() => mockSideDrawerBloc.state)
-          .thenReturn(const SideDrawerReady(listAdmin, [], ''));
+          .thenReturn(const SideDrawerReady(listAdmin, [], null, false, false, null));
 
       //act
-      await tester.pumpWidget(makeTestableWidget(const SideDrawer()));
+      await tester.pumpWidget(makeTestableWidget(SideDrawer()));
 
       //assert
       expect(find.text("Home"), findsOneWidget);
@@ -114,10 +114,10 @@ void main() {
         (WidgetTester tester) async {
       //arrange
       when(() => mockSideDrawerBloc.state)
-          .thenReturn(const SideDrawerReady(listSuperAdmin, [], ''));
+          .thenReturn(const SideDrawerReady(listSuperAdmin, [], null, false, false, null));
 
       //act
-      await tester.pumpWidget(makeTestableWidget(const SideDrawer()));
+      await tester.pumpWidget(makeTestableWidget(SideDrawer()));
 
       //assert
       expect(find.text("Home"), findsOneWidget);

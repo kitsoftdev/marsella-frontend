@@ -89,7 +89,7 @@ void main() {
       () async {
         // arrange
         when(mockRemoteDataSource.getAuthenticate(tusername, tpassword))
-            .thenThrow(ServerException());
+            .thenThrow(ServerException(statusCode: 400));
 
         // act
         final result = await repository.getAuthenticate(tusername, tpassword);
@@ -158,7 +158,7 @@ void main() {
         // arrange
         when(mockRemoteDataSource.registerUser(
                 tUserModel, 'orgaId', '1234', 'user'))
-            .thenThrow(ServerException());
+            .thenThrow(ServerException(statusCode: 400));
 
         // act
         final result = await repository.registerUser(
@@ -228,7 +228,7 @@ void main() {
       () async {
         // arrange
         when(mockRemoteDataSource.changeOrga('user', 'orgaId'))
-            .thenThrow(ServerException());
+            .thenThrow(ServerException(statusCode: 400));
 
         // act
         final result = await repository.changeOrga('user', 'orgaId');
@@ -298,7 +298,7 @@ void main() {
         // arrange
         when(mockRemoteDataSource.getAuthenticateGoogle(
                 tUserModel, 'googletoken'))
-            .thenThrow(ServerException());
+            .thenThrow(ServerException(statusCode: 400));
 
         // act
         final result =

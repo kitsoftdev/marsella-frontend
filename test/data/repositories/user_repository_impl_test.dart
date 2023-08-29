@@ -98,7 +98,7 @@ void main() {
       'debe retornar una server failure cuando el backend de users falla',
       () async {
         // arrange
-        when(mockRemoteDataSource.getUser(any)).thenThrow(ServerException());
+        when(mockRemoteDataSource.getUser(any)).thenThrow(ServerException(statusCode: 400));
 
         // act
         final result = await repository.getUser(newUserId);
@@ -154,7 +154,7 @@ void main() {
       'debe retornar una server failure el backend de agregar user falla',
       () async {
         // arrange
-        when(mockRemoteDataSource.addUser(any)).thenThrow(ServerException());
+        when(mockRemoteDataSource.addUser(any)).thenThrow(ServerException(statusCode: 400));
 
         // act
         final result = await repository.addUser(tUserModel.name,
@@ -212,7 +212,7 @@ void main() {
       () async {
         // arrange
         when(mockRemoteDataSource.updateUser(any, any))
-            .thenThrow(ServerException());
+            .thenThrow(ServerException(statusCode: 400));
 
         // act
         final result = await repository.updateUser(tUserModel.id, tUserModel);
@@ -267,7 +267,7 @@ void main() {
       'debe retornar una server failure el backend de eliminar user falla',
       () async {
         // arrange
-        when(mockRemoteDataSource.deleteUser(any)).thenThrow(ServerException());
+        when(mockRemoteDataSource.deleteUser(any)).thenThrow(ServerException(statusCode: 400));
 
         // act
         final result = await repository.deleteUser(tUserModel.id);
@@ -325,7 +325,7 @@ void main() {
       () async {
         // arrange
         when(mockRemoteDataSource.enableUser(any, any))
-            .thenThrow(ServerException());
+            .thenThrow(ServerException(statusCode: 400));
 
         // act
         final result = await repository.enableUser(tUserModel.id, false);

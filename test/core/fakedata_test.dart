@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:lomba_frontend/core/fakedata.dart';
+import 'package:marsellafrontend/core/fakedata.dart';
 
 void main() {
   test('TestRandomItem', () {

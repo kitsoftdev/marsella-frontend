@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:lomba_frontend/core/validators.dart';
+import 'package:marsellafrontend/core/validators.dart';
 
 void main() {
   test('debe retornar campo requerido cuando el email id es vacío', () {

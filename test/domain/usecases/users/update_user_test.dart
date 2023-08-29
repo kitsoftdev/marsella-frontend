@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_guid/flutter_guid.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:lomba_frontend/domain/entities/user.dart';
-import 'package:lomba_frontend/domain/usecases/users/update_user.dart';
+import 'package:marsellafrontend/domain/entities/user.dart';
+import 'package:marsellafrontend/domain/usecases/users/update_user.dart';
 import 'package:mockito/mockito.dart';
 
 import 'user_test_helper.mocks.dart';
@@ -24,7 +24,11 @@ void main() {
       username: 'test',
       email: 'te@mp.com',
       enabled: true,
-      builtIn: false);
+      builtIn: false,
+      pictureUrl: null,
+      pictureCloudFileId: null,
+      pictureThumbnailUrl: null,
+      pictureThumbnailCloudFileId: null,);
 
   test('debe actualizar un nuevo user', () async {
     //arrange

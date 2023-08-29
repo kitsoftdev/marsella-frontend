@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_guid/flutter_guid.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:lomba_frontend/domain/entities/orga.dart';
-import 'package:lomba_frontend/domain/usecases/orgas/add_orga.dart';
+import 'package:marsellafrontend/domain/entities/orga.dart';
+import 'package:marsellafrontend/domain/usecases/orgas/add_orga.dart';
 import 'package:mockito/mockito.dart';
 
 import 'orga_repository_helper.mocks.dart';

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:lomba_frontend/core/model_container.dart';
-import 'package:lomba_frontend/core/widgets/body_formatter.dart';
-import 'package:lomba_frontend/core/widgets/scaffold_manager.dart';
-import 'package:lomba_frontend/core/widgets/snackbar_notification.dart';
+import 'package:marsellafrontend/core/model_container.dart';
+import 'package:marsellafrontend/core/widgets/body_formatter.dart';
+import 'package:marsellafrontend/core/widgets/scaffold_manager.dart';
+import 'package:marsellafrontend/core/widgets/snackbar_notification.dart';
 
 void main() {
   testWidgets('snackBarNotify - mostrar!', (WidgetTester tester) async {

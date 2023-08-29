@@ -1,14 +1,28 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:lomba_frontend/presentation/sidedrawer/bloc/sidedrawer_event.dart';
+import 'package:marsellafrontend/core/fakedata.dart';
+import 'package:marsellafrontend/domain/entities/user.dart';
+import 'package:marsellafrontend/presentation/sidedrawer/bloc/sidedrawer_event.dart';
 
 void main() {
+
+  const tUser = User(
+      id: '1',
+      name: 'Test User',
+      username: 'test',
+      email: 'te@mp.com',
+      enabled: true,
+      builtIn: false,
+      pictureUrl: null,
+      pictureCloudFileId: null,
+      pictureThumbnailUrl: null,
+      pictureThumbnailCloudFileId: null);
   
-  const tOnSideDrawerLoading = OnSideDrawerLoading();
-  const t_OnSideDrawerLoading = OnSideDrawerLoading();
-  const tOnSideDrawerChangeOrga = OnSideDrawerChangeOrga('');
-  const t_OnSideDrawerChangeOrga = OnSideDrawerChangeOrga('');
-  const tOnSideDrawerReady = OnSideDrawerReady();
-  const t_OnSideDrawerReady = OnSideDrawerReady();
+  const tOnSideDrawerLoading = OnSideDrawerLoading(null, null, [], null);
+  const t_OnSideDrawerLoading = OnSideDrawerLoading(null, null, [], null);
+  const tOnSideDrawerChangeOrga = OnSideDrawerChangeOrga('', tUser);
+  const t_OnSideDrawerChangeOrga = OnSideDrawerChangeOrga('', tUser);
+  const tOnSideDrawerReady = OnSideDrawerReady([], [], null, false, false, null);
+  const t_OnSideDrawerReady = OnSideDrawerReady([], [], null, false, false, null);
   const tOnSideDrawerLogOff = OnSideDrawerLogOff();
   const t_OnSideDrawerLogOff = OnSideDrawerLogOff();
 

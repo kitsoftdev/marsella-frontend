@@ -118,7 +118,7 @@ void main() {
       () async {
         // arrange
         when(mockRemoteDataSource.getOrgas(any, any, any, any))
-            .thenThrow(ServerException());
+            .thenThrow(ServerException(statusCode: 400));
 
         // act
         final result = await repository.getOrgas("", "", 1, 10);
@@ -180,7 +180,7 @@ void main() {
       () async {
         // arrange
         when(mockRemoteDataSource.getOrgaUsers(any))
-            .thenThrow(ServerException());
+            .thenThrow(ServerException(statusCode: 400));
 
         // act
         final result = await repository.getOrgaUsers(fakeOrgaIdSystem);
@@ -240,7 +240,7 @@ void main() {
       () async {
         // arrange
         when(mockRemoteDataSource.getOrgaUser(any, any))
-            .thenThrow(ServerException());
+            .thenThrow(ServerException(statusCode: 400));
 
         // act
         final result = await repository.getOrgaUser('orgaId', 'userId');
@@ -281,7 +281,7 @@ void main() {
       'debe retornar una server failure el backend de orgas falla',
       () async {
         // arrange
-        when(mockRemoteDataSource.getOrga(any)).thenThrow(ServerException());
+        when(mockRemoteDataSource.getOrga(any)).thenThrow(ServerException(statusCode: 400));
 
         // act
         final result = await repository.getOrga(newOrgaId);
@@ -337,7 +337,7 @@ void main() {
       'debe retornar una server failure el backend de agregar orga falla',
       () async {
         // arrange
-        when(mockRemoteDataSource.addOrga(any)).thenThrow(ServerException());
+        when(mockRemoteDataSource.addOrga(any)).thenThrow(ServerException(statusCode: 400));
 
         // act
         final result = await repository.addOrga(
@@ -398,7 +398,7 @@ void main() {
       () async {
         // arrange
         when(mockRemoteDataSource.addOrgaUser(any))
-            .thenThrow(ServerException());
+            .thenThrow(ServerException(statusCode: 400));
 
         // act
         final result = await repository.addOrgaUser(
@@ -462,7 +462,7 @@ void main() {
       () async {
         // arrange
         when(mockRemoteDataSource.updateOrga(any, any))
-            .thenThrow(ServerException());
+            .thenThrow(ServerException(statusCode: 400));
 
         // act
         final result = await repository.updateOrga(tOrgaModel.id, tOrgaModel);
@@ -518,7 +518,7 @@ void main() {
       () async {
         // arrange
         when(mockRemoteDataSource.updateOrgaUser(any, any, any))
-            .thenThrow(ServerException());
+            .thenThrow(ServerException(statusCode: 400));
 
         // act
         final result = await repository.updateOrgaUser(
@@ -575,7 +575,7 @@ void main() {
       'debe retornar una server failure el backend de eliminar orga falla',
       () async {
         // arrange
-        when(mockRemoteDataSource.deleteOrga(any)).thenThrow(ServerException());
+        when(mockRemoteDataSource.deleteOrga(any)).thenThrow(ServerException(statusCode: 400));
 
         // act
         final result = await repository.deleteOrga(tOrgaModel.id);
@@ -631,7 +631,7 @@ void main() {
       () async {
         // arrange
         when(mockRemoteDataSource.deleteOrgaUser(any, any))
-            .thenThrow(ServerException());
+            .thenThrow(ServerException(statusCode: 400));
 
         // act
         final result =
@@ -690,7 +690,7 @@ void main() {
       () async {
         // arrange
         when(mockRemoteDataSource.enableOrga(any, any))
-            .thenThrow(ServerException());
+            .thenThrow(ServerException(statusCode: 400));
 
         // act
         final result = await repository.enableOrga(tOrgaModel.id, false);
@@ -749,7 +749,7 @@ void main() {
       () async {
         // arrange
         when(mockRemoteDataSource.enableOrgaUser(any, any, any))
-            .thenThrow(ServerException());
+            .thenThrow(ServerException(statusCode: 400));
 
         // act
         final result = await repository.enableOrgaUser(

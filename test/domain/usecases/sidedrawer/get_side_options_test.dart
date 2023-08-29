@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:lomba_frontend/core/constants.dart';
-import 'package:lomba_frontend/domain/repositories/local_repository.dart';
-import 'package:lomba_frontend/domain/usecases/sidedrawer/get_side_options.dart';
+import 'package:marsellafrontend/core/constants.dart';
+import 'package:marsellafrontend/domain/repositories/local_repository.dart';
+import 'package:marsellafrontend/domain/usecases/sidedrawer/get_side_options.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 

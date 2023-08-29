@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:lomba_frontend/core/model_container.dart';
-import 'package:lomba_frontend/core/widgets/body_formatter.dart';
-import 'package:lomba_frontend/core/widgets/scaffold_manager.dart';
+import 'package:marsellafrontend/core/model_container.dart';
+import 'package:marsellafrontend/core/widgets/body_formatter.dart';
+import 'package:marsellafrontend/core/widgets/scaffold_manager.dart';
 
 void main() {
   testWidgets('Formato según tamaño de pantalla: 1200',

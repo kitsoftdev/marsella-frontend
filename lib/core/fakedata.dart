@@ -1,9 +1,9 @@
 import 'package:flutter_guid/flutter_guid.dart';
-import 'package:marsellafrontend/core/constants.dart';
-
 import '../data/models/orga_model.dart';
 import '../data/models/orgauser_model.dart';
+import '../data/models/role_model.dart';
 import '../data/models/user_model.dart';
+import 'constants.dart';
 
 ///Archivo con datos falsos para hacer funcionar el prototipo.
 
@@ -50,6 +50,40 @@ List<OrgaModel> fakeListOrgas = <OrgaModel>[
       builtIn: false),
 ];
 
+///Lista de relaciones de Orgas con Users y Roles, utiliza también
+///los ID especificados arriba, junto con los Roles definidos del sistema.
+List<OrgaUserModel> fakeListOrgaUsers = <OrgaUserModel>[
+  OrgaUserModel(
+      userId: fakeUserIdSuperAdmin,
+      orgaId: fakeOrgaIdSystem,
+      roles: const <String>[Roles.roleSuperAdmin],
+      enabled: true,
+      builtIn: true),
+  OrgaUserModel(
+      userId: fakeUserIdAdmin,
+      orgaId: fakeOrgaIdRoot,
+      roles: const <String>[Roles.roleAdmin],
+      enabled: true,
+      builtIn: false),
+  OrgaUserModel(
+      userId: fakeUserIdUser01,
+      orgaId: fakeOrgaIdSample02,
+      roles: const <String>[Roles.roleUser],
+      enabled: true,
+      builtIn: false),
+  OrgaUserModel(
+      userId: fakeUserIdUser02,
+      orgaId: fakeOrgaIdSample03,
+      roles: const <String>[Roles.roleUser],
+      enabled: true,
+      builtIn: false),
+  OrgaUserModel(
+      userId: fakeUserIdReviewer01,
+      orgaId: fakeOrgaIdRoot,
+      roles: const <String>[Roles.roleReviewer],
+      enabled: true,
+      builtIn: false)
+];
 
 ///Lista de [UserModel] con usuarios fake para el prototipo. Utiliza también
 ///los ID especificados arriba para los usuarios de mentira.
@@ -116,6 +150,14 @@ List<UserModel> fakeListUsers = <UserModel>[
   ),
 ];
 
+///Lista de Roles fake para utilizar con el listado de roles en el prototipo.
+List<RoleModel> fakeRoles = [
+  const RoleModel(name: Roles.roleSuperAdmin, enabled: true),
+  const RoleModel(name: Roles.roleAdmin, enabled: true),
+  const RoleModel(name: Roles.roleReviewer, enabled: true),
+  const RoleModel(name: Roles.roleUser, enabled: true),
+  const RoleModel(name: Roles.roleAnonymous, enabled: true)
+];
 
 class TestRandomItem {
   final String id;

@@ -1,20 +1,21 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:lomba_frontend/core/constants.dart';
-import 'package:lomba_frontend/data/models/session_model.dart';
-import 'package:lomba_frontend/domain/usecases/local/get_has_login.dart';
-import 'package:lomba_frontend/domain/usecases/local/get_session_status.dart';
-import 'package:lomba_frontend/domain/usecases/login/change_orga.dart';
-import 'package:lomba_frontend/data/models/orga_model.dart';
-import 'package:lomba_frontend/domain/entities/orga.dart';
-import 'package:lomba_frontend/domain/usecases/orgas/get_orga.dart';
-import 'package:lomba_frontend/domain/usecases/orgas/get_orgasbyuser.dart';
-import 'package:lomba_frontend/domain/usecases/sidedrawer/do_logoff.dart';
-import 'package:lomba_frontend/domain/usecases/sidedrawer/get_side_options.dart';
-import 'package:lomba_frontend/presentation/sidedrawer/bloc/sidedrawer_bloc.dart';
-import 'package:lomba_frontend/presentation/sidedrawer/bloc/sidedrawer_event.dart';
-import 'package:lomba_frontend/presentation/sidedrawer/bloc/sidedrawer_state.dart';
+import 'package:marsellafrontend/core/constants.dart';
+import 'package:marsellafrontend/data/models/session_model.dart';
+import 'package:marsellafrontend/domain/entities/user.dart';
+import 'package:marsellafrontend/domain/usecases/local/get_has_login.dart';
+import 'package:marsellafrontend/domain/usecases/local/get_session_status.dart';
+import 'package:marsellafrontend/domain/usecases/login/change_orga.dart';
+import 'package:marsellafrontend/data/models/orga_model.dart';
+import 'package:marsellafrontend/domain/entities/orga.dart';
+import 'package:marsellafrontend/domain/usecases/orgas/get_orga.dart';
+import 'package:marsellafrontend/domain/usecases/orgas/get_orgasbyuser.dart';
+import 'package:marsellafrontend/domain/usecases/sidedrawer/do_logoff.dart';
+import 'package:marsellafrontend/domain/usecases/sidedrawer/get_side_options.dart';
+import 'package:marsellafrontend/presentation/sidedrawer/bloc/sidedrawer_bloc.dart';
+import 'package:marsellafrontend/presentation/sidedrawer/bloc/sidedrawer_event.dart';
+import 'package:marsellafrontend/presentation/sidedrawer/bloc/sidedrawer_state.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
@@ -65,6 +66,17 @@ void main() {
       code: 'test',
       enabled: true,
       builtIn: false);
+  const tUser = User(
+      id: '1',
+      name: 'Test User',
+      username: 'test',
+      email: 'te@mp.com',
+      enabled: true,
+      builtIn: false,
+      pictureUrl: null,
+      pictureCloudFileId: null,
+      pictureThumbnailUrl: null,
+      pictureThumbnailCloudFileId: null);
 
   test(
     'el estado inicial de sidedraer debe ser vacío',
@@ -86,12 +98,12 @@ void main() {
           .thenAnswer((_) async => const Right(<Orga>[tOrga]));
       return sideDrawerBloc;
     },
-    act: (bloc) => bloc.add(const OnSideDrawerLoading()),
+    act: (bloc) => bloc.add(const OnSideDrawerLoading(null, null, [], null)),
     wait: const Duration(milliseconds: 500),
     expect: () => [
       SideDrawerLoading(),
       const SideDrawerReady(
-          listAnonymous, <Orga>[tOrga], '00000100-0100-0100-0100-000000000100'),
+          listAnonymous, <Orga>[tOrga], null, false, false, null),
     ],
     verify: (bloc) {
       verify(mockGetSideOptions.execute());
@@ -125,11 +137,11 @@ void main() {
           .thenAnswer((_) async => const Right(<Orga>[tOrga]));
       return sideDrawerBloc;
     },
-    act: (bloc) => bloc.add(OnSideDrawerChangeOrga(tOrga.id)),
+    act: (bloc) => bloc.add(OnSideDrawerChangeOrga(tOrga.id, tUser)),
     wait: const Duration(milliseconds: 500),
     expect: () => [
       const SideDrawerReady(
-          listAnonymous, <Orga>[tOrga], '00000002-0002-0002-0002-000000000002'),
+          listAnonymous, <Orga>[tOrga], null, false, false, null),
     ],
     verify: (bloc) {
       verify(mockGetSession.execute());

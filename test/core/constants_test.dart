@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:lomba_frontend/core/constants.dart';
+import 'package:marsellafrontend/core/constants.dart';
 
 void main() {
   test('clase con lista de roles debe tener la cantidad de 5', () {

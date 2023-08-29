@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:lomba_frontend/core/constants.dart';
-import 'package:lomba_frontend/data/models/session_model.dart';
-import 'package:lomba_frontend/domain/repositories/login_repository.dart';
-import 'package:lomba_frontend/domain/usecases/login/get_authenticate.dart';
+import 'package:marsellafrontend/core/constants.dart';
+import 'package:marsellafrontend/data/models/session_model.dart';
+import 'package:marsellafrontend/domain/repositories/login_repository.dart';
+import 'package:marsellafrontend/domain/usecases/login/get_authenticate.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
