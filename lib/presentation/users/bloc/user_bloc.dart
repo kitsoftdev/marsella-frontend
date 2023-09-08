@@ -60,16 +60,17 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         emit(UserLoading());
 
         var user = const User(
-            id: '',
-            name: '',
-            username: '',
-            email: '',
-            enabled: true,
-            builtIn: true,
-            pictureUrl: null,
-            pictureCloudFileId: null,
-            pictureThumbnailUrl: null,
-            pictureThumbnailCloudFileId: null,);
+          id: '',
+          name: '',
+          username: '',
+          email: '',
+          enabled: true,
+          builtIn: true,
+          pictureUrl: null,
+          pictureCloudFileId: null,
+          pictureThumbnailUrl: null,
+          pictureThumbnailCloudFileId: null,
+        );
         final result = await _getUser.execute(event.userId);
         result.fold((l) => emit(UserError(l.message)), (r) => user = r);
 
@@ -81,7 +82,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         final orgaId = '00000200-0200-0200-0200-000000000200';
 
         emit(UserLoaded(user, ''));
-        
       },
       transformer: debounce(const Duration(milliseconds: 0)),
     );
@@ -127,7 +127,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       var role = "user";
 
       final result = await _registerUser.execute(event.name, event.username,
-          event.email, auth.getOrgaId()!, event.password, role);
+          event.email, auth.getOrgaId() ?? "", event.password, role);
 
       result.fold((l) => emit(UserError(l.message)),
           (r) => {emit(UserStart(" El usuario ${event.username} fue creado"))});
@@ -180,16 +180,17 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       emit(UserLoading());
 
       final user = User(
-          id: event.id,
-          name: event.name,
-          username: event.username,
-          email: event.email,
-          enabled: event.enabled,
-          builtIn: false,
-          pictureUrl: event.user.pictureUrl,
-          pictureCloudFileId: event.user.pictureCloudFileId,
-          pictureThumbnailUrl: event.user.pictureThumbnailUrl,
-          pictureThumbnailCloudFileId: event.user.pictureThumbnailCloudFileId,);
+        id: event.id,
+        name: event.name,
+        username: event.username,
+        email: event.email,
+        enabled: event.enabled,
+        builtIn: false,
+        pictureUrl: event.user.pictureUrl,
+        pictureCloudFileId: event.user.pictureCloudFileId,
+        pictureThumbnailUrl: event.user.pictureThumbnailUrl,
+        pictureThumbnailCloudFileId: event.user.pictureThumbnailCloudFileId,
+      );
 
       final result = await _updateUser.execute(event.id, user);
       result.fold(
@@ -262,12 +263,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       final result =
           await _updateUserPassword.execute(event.user.id, event.password);
 
-      result.fold(
-          (l) => emit(UserError(l.message)),
-          (r) => {
-                emit(UserLoaded(
-                    event.user, " Contraseña Modificada"))
-              });
+      result.fold((l) => emit(UserError(l.message)),
+          (r) => {emit(UserLoaded(event.user, " Contraseña Modificada"))});
     });
     on<OnUserOrgaEdit>((event, emit) async {
       emit(UserLoading());
@@ -288,20 +285,21 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       if (isUpdated) {
         final resUser = await _getUser.execute(event.userId);
 
-        final resultOU = await _getOrgaUser.execute(
-            event.orgaUser.orgaId, event.userId);
+        final resultOU =
+            await _getOrgaUser.execute(event.orgaUser.orgaId, event.userId);
 
         var user = const User(
-            id: '',
-            name: '',
-            username: '',
-            email: '',
-            enabled: false,
-            builtIn: false,
-            pictureUrl: null,
-            pictureCloudFileId: null,
-            pictureThumbnailUrl: null,
-            pictureThumbnailCloudFileId: null,);
+          id: '',
+          name: '',
+          username: '',
+          email: '',
+          enabled: false,
+          builtIn: false,
+          pictureUrl: null,
+          pictureCloudFileId: null,
+          pictureThumbnailUrl: null,
+          pictureThumbnailCloudFileId: null,
+        );
         resUser.fold((l) => emit(UserError(l.message)), (r) => {user = r});
 
         List<OrgaUser> listOrgaUsers = [];
@@ -316,16 +314,17 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
       //-------------
       var user = const User(
-          id: '',
-          name: '',
-          username: '',
-          email: '',
-          enabled: false,
-          builtIn: false,
-          pictureUrl: null,
-          pictureCloudFileId: null,
-          pictureThumbnailUrl: null,
-          pictureThumbnailCloudFileId: null,);
+        id: '',
+        name: '',
+        username: '',
+        email: '',
+        enabled: false,
+        builtIn: false,
+        pictureUrl: null,
+        pictureCloudFileId: null,
+        pictureThumbnailUrl: null,
+        pictureThumbnailCloudFileId: null,
+      );
       final resUser = await _getUser.execute(event.orgaUser.userId);
       resUser.fold((l) => emit(UserError(l.message)), (r) => {user = r});
       //-------------
@@ -387,7 +386,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       var name = '';
       final resUser = await _getUser.execute(event.userId);
       resUser.fold((l) => emit(UserError(l.message)), (r) => name = r.name);
-      
+
       final orgaId = '00000200-0200-0200-0200-000000000200';
 
       final result = await _addOrgaUser.execute(

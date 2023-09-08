@@ -11,12 +11,6 @@
             "type": "dart"
         },
         {
-            "name": "DISEÑO debug",
-            "program": "lib/design.dart",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
             "name": "FEAT DIEGO debug",
             "program": "lib/main.dart",
             "request": "launch",

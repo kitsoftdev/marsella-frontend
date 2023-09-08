@@ -98,7 +98,8 @@ class UsersPage extends StatelessWidget {
             children: [
               BlocBuilder<UserBloc, UserState>(builder: (context, state) {
                 return (state is UserListLoaded)
-                    ? MarsellaPageTitle(text: 'Usuarios (${state.users.length})')
+                    ? MarsellaPageTitle(
+                        text: 'Usuarios (${state.users.length})')
                     : (state is UserLoaded)
                         ? const MarsellaPageTitle(text: 'Usuario')
                         : (state is UserUpdatePassword)
@@ -118,7 +119,8 @@ class UsersPage extends StatelessWidget {
               }),
               BlocBuilder<VisibilityLiveCubit, VisibilityLiveState>(
                 builder: (context, statecubitvisibility) {
-                  _searchUserController.text = context.read<SearchUserLiveCubit>().state.searchText;
+                  _searchUserController.text =
+                      context.read<SearchUserLiveCubit>().state.searchText;
                   List<Widget> childrens = [];
                   childrens.add(const SizedBox(
                     height: 20,
@@ -229,26 +231,34 @@ class UsersPage extends StatelessWidget {
                                           if (_searchUserController
                                               .text.isNotEmpty) {
                                             userNotInOrga
-                                            ?context.read<UserBloc>().add(
-                                              OnUserListLoad(
-                                                context.read<SessionLiveCubit>()
-                                                  .getOrgaId,
-                                                _searchUserController.text,
-                                                <String, int>{
-                                                  listFields.values.first: 1
-                                                },
-                                                1,
-                                                _fixPageSize))
-                                            :context.read<UserBloc>().add(
-                                              OnUserListNotInOrga(
-                                                context.read<SessionLiveCubit>()
-                                                  .getOrgaId,
-                                                _searchUserController.text,
-                                                <String, int>{
-                                                  listFields.values.first: 1
-                                                },
-                                                1,
-                                                _fixPageSize));
+                                                ? context.read<UserBloc>().add(
+                                                    OnUserListLoad(
+                                                        context
+                                                            .read<
+                                                                SessionLiveCubit>()
+                                                            .getOrgaId,
+                                                        _searchUserController
+                                                            .text,
+                                                        <String, int>{
+                                                          listFields
+                                                              .values.first: 1
+                                                        },
+                                                        1,
+                                                        _fixPageSize))
+                                                : context.read<UserBloc>().add(
+                                                    OnUserListNotInOrga(
+                                                        context
+                                                            .read<
+                                                                SessionLiveCubit>()
+                                                            .getOrgaId,
+                                                        _searchUserController
+                                                            .text,
+                                                        <String, int>{
+                                                          listFields
+                                                              .values.first: 1
+                                                        },
+                                                        1,
+                                                        _fixPageSize));
                                             /*context.read<UserBloc>().add(
                                               (!userNotInOrga)
                                               ? OnUserListLoad(
@@ -1045,8 +1055,8 @@ class UsersPage extends StatelessWidget {
                                             IgnorePointer(
                                               child: ShamiaInputToggleOption(
                                                   text: '',
-                                                  active:
-                                                      state.users[index].enabled,
+                                                  active: state
+                                                      .users[index].enabled,
                                                   onChanged: (value) {}),
                                             ),
                                           ],
@@ -1109,7 +1119,6 @@ class UsersPage extends StatelessWidget {
       ),
     );
   }
-
 }
 
 class UserUpdatePasswordForm extends StatelessWidget {
@@ -1239,8 +1248,8 @@ class UserEditingForm extends StatelessWidget {
         text: '',
         titleController: usernameController,
         onChanged: (value) {
-          context.read<UserBloc>().add(OnUserValidateEdit(state.user.id,
-              usernameController.text, emailController.text, state));
+          //context.read<UserBloc>().add(OnUserValidateEdit(state.user.id,
+          //usernameController.text, emailController.text, state));
         },
         validator: (value) => Validators.validateName(value ?? ""),
       ),
@@ -1256,8 +1265,8 @@ class UserEditingForm extends StatelessWidget {
         text: '',
         titleController: emailController,
         onChanged: (value) {
-          context.read<UserBloc>().add(OnUserValidateEdit(state.user.id,
-              usernameController.text, emailController.text, state));
+          //context.read<UserBloc>().add(OnUserValidateEdit(state.user.id,
+          //    usernameController.text, emailController.text, state));
         },
         validator: (value) => Validators.validateName(value ?? ""),
       ),
@@ -1347,8 +1356,8 @@ class UserAddingForm extends StatelessWidget {
         text: '',
         titleController: usernameController,
         onChanged: (value) {
-          context.read<UserBloc>().add(OnUserValidate(
-              usernameController.text, emailController.text, state));
+          //context.read<UserBloc>().add(OnUserValidate(
+          //    usernameController.text, emailController.text, state));
         },
         validator: (value) => Validators.validateName(value ?? ""),
       ),
@@ -1364,8 +1373,8 @@ class UserAddingForm extends StatelessWidget {
         text: '',
         titleController: emailController,
         onChanged: (value) {
-          context.read<UserBloc>().add(OnUserValidate(
-              usernameController.text, emailController.text, state));
+          //context.read<UserBloc>().add(OnUserValidate(
+          //    usernameController.text, emailController.text, state));
         },
         validator: (value) => Validators.validateName(value ?? ""),
       ),
