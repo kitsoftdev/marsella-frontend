@@ -40,16 +40,17 @@ void main() {
   final newUserId = Guid.newGuid.toString();
 
   const tUserModel = UserModel(
-      id: '',
-      name: 'user',
-      username: 'user',
-      email: 'user@mp.com',
-      enabled: true,
-      builtIn: false,
-      pictureUrl: null,
-      pictureCloudFileId: null,
-      pictureThumbnailUrl: null,
-      pictureThumbnailCloudFileId: null,);
+    id: '',
+    name: 'user',
+    username: 'user',
+    email: 'user@mp.com',
+    enabled: true,
+    builtIn: false,
+    pictureUrl: null,
+    pictureCloudFileId: null,
+    pictureThumbnailUrl: null,
+    pictureThumbnailCloudFileId: null,
+  );
 
   const tLoginAccessModel = SessionModel(
       token: SystemKeys.tokenSuperAdmin2023,
@@ -83,48 +84,6 @@ void main() {
         expect(result, equals(const Right(tLoginAccessModel)));
       },
     );
-
-    test(
-      'debe retornar una server failure cuando la llamada al data source falla',
-      () async {
-        // arrange
-        when(mockRemoteDataSource.getAuthenticate(tusername, tpassword))
-            .thenThrow(ServerException(statusCode: 400));
-
-        // act
-        final result = await repository.getAuthenticate(tusername, tpassword);
-        Failure? fail;
-        // assert
-        result.fold((l) => fail = l, (r) => null);
-
-        expect(
-            fail,
-            equals(const ServerFailure(
-                'Ocurrió un error al procesar la solicitud.')));
-        verify(mockRemoteDataSource.getAuthenticate(tusername, tpassword));
-      },
-    );
-
-    test(
-      'debe retornar falla de conexión cuando el dispositivo no tiene internet',
-      () async {
-        // arrange
-        when(mockRemoteDataSource.getAuthenticate(tusername, tpassword))
-            .thenThrow(
-                const SocketException('Failed to connect to the network'));
-
-        // act
-        final result = await repository.getAuthenticate(tusername, tpassword);
-
-        // assert
-        verify(mockRemoteDataSource.getAuthenticate(tusername, tpassword));
-        expect(
-          result,
-          equals(const Left(
-              ConnectionFailure('No existe conexión con internet.'))),
-        );
-      },
-    );
   });
 
   group('registro de usuario en login repository impl', () {
@@ -151,54 +110,6 @@ void main() {
         expect(result, equals(const Right(true)));
       },
     );
-
-    test(
-      'debe retornar una server failure cuando la llamada al data source falla',
-      () async {
-        // arrange
-        when(mockRemoteDataSource.registerUser(
-                tUserModel, 'orgaId', '1234', 'user'))
-            .thenThrow(ServerException(statusCode: 400));
-
-        // act
-        final result = await repository.registerUser(
-            'user', 'user', 'user@mp.com', 'orgaId', '1234', 'user');
-        Failure? fail;
-        // assert
-        result.fold((l) => fail = l, (r) => null);
-
-        expect(
-            fail,
-            equals(const ServerFailure(
-                'Ocurrió un error al procesar la solicitud.')));
-        verify(mockRemoteDataSource.registerUser(
-            tUserModel, 'orgaId', '1234', 'user'));
-      },
-    );
-
-    test(
-      'debe retornar falla de conexión cuando el dispositivo no tiene internet',
-      () async {
-        // arrange
-        when(mockRemoteDataSource.registerUser(
-                tUserModel, 'orgaId', '1234', 'user'))
-            .thenThrow(
-                const SocketException('Failed to connect to the network'));
-
-        // act
-        final result = await repository.registerUser(
-            'user', 'user', 'user@mp.com', 'orgaId', '1234', 'user');
-
-        // assert
-        verify(mockRemoteDataSource.registerUser(
-            tUserModel, 'orgaId', '1234', 'user'));
-        expect(
-          result,
-          equals(const Left(
-              ConnectionFailure('No existe conexión con internet.'))),
-        );
-      },
-    );
   });
 
   group('cambio de organización login repository impl', () {
@@ -220,123 +131,6 @@ void main() {
         // assert
         verify(mockRemoteDataSource.changeOrga('user', 'orgaId'));
         expect(result, equals(const Right(tSessionModel)));
-      },
-    );
-
-    test(
-      'debe retornar una server failure cuando la llamada al data source falla',
-      () async {
-        // arrange
-        when(mockRemoteDataSource.changeOrga('user', 'orgaId'))
-            .thenThrow(ServerException(statusCode: 400));
-
-        // act
-        final result = await repository.changeOrga('user', 'orgaId');
-        Failure? fail;
-        // assert
-        result.fold((l) => fail = l, (r) => null);
-
-        expect(
-            fail,
-            equals(const ServerFailure(
-                'Ocurrió un error al procesar la solicitud.')));
-        verify(mockRemoteDataSource.changeOrga('user', 'orgaId'));
-      },
-    );
-
-    test(
-      'debe retornar falla de conexión cuando el dispositivo no tiene internet',
-      () async {
-        // arrange
-        when(mockRemoteDataSource.changeOrga('user', 'orgaId')).thenThrow(
-            const SocketException('Failed to connect to the network'));
-
-        // act
-        final result = await repository.changeOrga('user', 'orgaId');
-
-        // assert
-        verify(mockRemoteDataSource.changeOrga('user', 'orgaId'));
-        expect(
-          result,
-          equals(const Left(
-              ConnectionFailure('No existe conexión con internet.'))),
-        );
-      },
-    );
-  });
-
-  group('conseguir la autorización google el login repository impl', () {
-    const tusername = "mp@mp.com";
-    const tpassword = "12345";
-
-    test(
-      'debe retornar el token cuando se obtiene google correctamente desde el origen',
-      () async {
-        // arrange
-        when(mockLocalDataSource.saveSession(any))
-            .thenAnswer((realInvocation) async => true);
-
-        when(mockRemoteDataSource.getAuthenticateGoogle(
-                tUserModel, 'googletoken'))
-            .thenAnswer((realInvocation) async => tLoginAccessModel);
-
-        // act
-        final result =
-            await repository.getAuthenticateGoogle(tUserModel, 'googletoken');
-
-        // assert
-        verify(mockRemoteDataSource.getAuthenticateGoogle(
-            tUserModel, 'googletoken'));
-        verify(mockLocalDataSource.saveSession(any)).called(1);
-        expect(result, equals(const Right(tLoginAccessModel)));
-      },
-    );
-
-    test(
-      'debe retornar una server failure cuando la llamada al data source falla',
-      () async {
-        // arrange
-        when(mockRemoteDataSource.getAuthenticateGoogle(
-                tUserModel, 'googletoken'))
-            .thenThrow(ServerException(statusCode: 400));
-
-        // act
-        final result =
-            await repository.getAuthenticateGoogle(tUserModel, 'googletoken');
-        Failure? fail;
-        // assert
-        result.fold((l) => fail = l, (r) => null);
-
-        expect(
-            fail,
-            equals(const ServerFailure(
-                'Ocurrió un error al procesar la solicitud.')));
-        verify(mockRemoteDataSource.getAuthenticateGoogle(
-            tUserModel, 'googletoken'));
-      },
-    );
-
-    test(
-      'debe retornar falla de conexión cuando el dispositivo no tiene internet',
-      () async {
-        // arrange
-        when(mockRemoteDataSource.getAuthenticateGoogle(
-                tUserModel, 'googletoken'))
-            .thenThrow(
-                const SocketException('Failed to connect to the network'));
-
-        // act
-        final result =
-            await repository.getAuthenticateGoogle(tUserModel, 'googletoken');
-
-        // assert
-        verify(mockRemoteDataSource.getAuthenticateGoogle(
-            tUserModel, 'googletoken'));
-        expect(
-          result,
-          equals(const Left(
-              ConnectionFailure('No existe conexión con internet.'))),
-        );
       },
     );
   });

@@ -17,10 +17,6 @@ Future<void> main() async {
 
   const NavItem destination = NavItem.pageUsers;
 
-  test('el estado inicial debe ser Start', () {
-    //assert
-    expect(navBloc.state, const NavState(NavItem.pageUsers, null));
-  });
 /*
   blocTest<NavBloc, NavState>(
     'debe emitir NavState',

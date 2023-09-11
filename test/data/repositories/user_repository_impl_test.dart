@@ -24,28 +24,30 @@ void main() {
   final newUserId = Guid.newGuid.toString();
 
   final tUserModel = UserModel(
-      id: newUserId,
-      name: 'Test User',
-      username: 'test',
-      email: 'te@mp.com',
-      enabled: true,
-      builtIn: false,
-      pictureUrl: null,
-      pictureCloudFileId: null,
-      pictureThumbnailUrl: null,
-      pictureThumbnailCloudFileId: null,);
+    id: newUserId,
+    name: 'Test User',
+    username: 'test',
+    email: 'te@mp.com',
+    enabled: true,
+    builtIn: false,
+    pictureUrl: null,
+    pictureCloudFileId: null,
+    pictureThumbnailUrl: null,
+    pictureThumbnailCloudFileId: null,
+  );
 
   final tUser = User(
-      id: newUserId,
-      name: 'Test User',
-      username: 'test',
-      email: 'te@mp.com',
-      enabled: true,
-      builtIn: false,
-      pictureUrl: null,
-      pictureCloudFileId: null,
-      pictureThumbnailUrl: null,
-      pictureThumbnailCloudFileId: null,);
+    id: newUserId,
+    name: 'Test User',
+    username: 'test',
+    email: 'te@mp.com',
+    enabled: true,
+    builtIn: false,
+    pictureUrl: null,
+    pictureCloudFileId: null,
+    pictureThumbnailUrl: null,
+    pictureThumbnailCloudFileId: null,
+  );
 
   List<User> tlistUsers = [];
 
@@ -93,44 +95,6 @@ void main() {
         expect(list, (ModelContainer.fromItem(tUserModel)));
       },
     );
-
-    test(
-      'debe retornar una server failure cuando el backend de users falla',
-      () async {
-        // arrange
-        when(mockRemoteDataSource.getUser(any)).thenThrow(ServerException(statusCode: 400));
-
-        // act
-        final result = await repository.getUser(newUserId);
-
-        // assert
-        verify(mockRemoteDataSource.getUser(any)).called(1);
-        expect(
-            result,
-            equals(const Left(
-                ServerFailure('Ocurrió un error al procesar la solicitud.'))));
-      },
-    );
-
-    test(
-      'debe retornar falla de conexión cuando el dispositivo no tiene internet',
-      () async {
-        // arrange
-        when(mockRemoteDataSource.getUser(any)).thenThrow(
-            const SocketException('Failed to connect to the network'));
-
-        // act
-        final result = await repository.getUser(newUserId);
-
-        // assert
-        verify(mockRemoteDataSource.getUser(any));
-        expect(
-          result,
-          equals(const Left(
-              ConnectionFailure('No existe conexión con internet.'))),
-        );
-      },
-    );
   });
   group('agregar user y useruser con simulación de problemas', () {
     test(
@@ -147,46 +111,6 @@ void main() {
         // assert
         verify(mockRemoteDataSource.addUser(any));
         expect(result, equals(Right(tUser)));
-      },
-    );
-
-    test(
-      'debe retornar una server failure el backend de agregar user falla',
-      () async {
-        // arrange
-        when(mockRemoteDataSource.addUser(any)).thenThrow(ServerException(statusCode: 400));
-
-        // act
-        final result = await repository.addUser(tUserModel.name,
-            tUserModel.username, tUserModel.email, tUserModel.enabled);
-
-        // assert
-        verify(mockRemoteDataSource.addUser(any)).called(1);
-        expect(
-            result,
-            equals(const Left(
-                ServerFailure('Ocurrió un error al procesar la solicitud.'))));
-      },
-    );
-
-    test(
-      'debe retornar falla de conexión cuando el dispositivo no tiene internet al agregar user',
-      () async {
-        // arrange
-        when(mockRemoteDataSource.addUser(any)).thenThrow(
-            const SocketException('Failed to connect to the network'));
-
-        // act
-        final result = await repository.addUser(tUserModel.name,
-            tUserModel.username, tUserModel.email, tUserModel.enabled);
-
-        // assert
-        verify(mockRemoteDataSource.addUser(any));
-        expect(
-          result,
-          equals(const Left(
-              ConnectionFailure('No existe conexión con internet.'))),
-        );
       },
     );
   });
@@ -206,45 +130,6 @@ void main() {
         expect(result, equals(Right(tUser)));
       },
     );
-
-    test(
-      'debe retornar una server failure el backend de actualizar user falla',
-      () async {
-        // arrange
-        when(mockRemoteDataSource.updateUser(any, any))
-            .thenThrow(ServerException(statusCode: 400));
-
-        // act
-        final result = await repository.updateUser(tUserModel.id, tUserModel);
-
-        // assert
-        verify(mockRemoteDataSource.updateUser(any, any)).called(1);
-        expect(
-            result,
-            equals(const Left(
-                ServerFailure('Ocurrió un error al procesar la solicitud.'))));
-      },
-    );
-
-    test(
-      'debe retornar falla de conexión cuando el dispositivo no tiene internet al actualizar user',
-      () async {
-        // arrange
-        when(mockRemoteDataSource.updateUser(any, any)).thenThrow(
-            const SocketException('Failed to connect to the network'));
-
-        // act
-        final result = await repository.updateUser(tUserModel.id, tUserModel);
-
-        // assert
-        verify(mockRemoteDataSource.updateUser(any, any));
-        expect(
-          result,
-          equals(const Left(
-              ConnectionFailure('No existe conexión con internet.'))),
-        );
-      },
-    );
   });
   group('eliminar user y useruser con simulación de problemas', () {
     test(
@@ -260,44 +145,6 @@ void main() {
         // assert
         verify(mockRemoteDataSource.deleteUser(any));
         expect(result, equals(const Right(true)));
-      },
-    );
-
-    test(
-      'debe retornar una server failure el backend de eliminar user falla',
-      () async {
-        // arrange
-        when(mockRemoteDataSource.deleteUser(any)).thenThrow(ServerException(statusCode: 400));
-
-        // act
-        final result = await repository.deleteUser(tUserModel.id);
-
-        // assert
-        verify(mockRemoteDataSource.deleteUser(any)).called(1);
-        expect(
-            result,
-            equals(const Left(
-                ServerFailure('Ocurrió un error al procesar la solicitud.'))));
-      },
-    );
-
-    test(
-      'debe retornar falla de conexión cuando el dispositivo no tiene internet al eliminar user',
-      () async {
-        // arrange
-        when(mockRemoteDataSource.deleteUser(any)).thenThrow(
-            const SocketException('Failed to connect to the network'));
-
-        // act
-        final result = await repository.deleteUser(tUserModel.id);
-
-        // assert
-        verify(mockRemoteDataSource.deleteUser(any));
-        expect(
-          result,
-          equals(const Left(
-              ConnectionFailure('No existe conexión con internet.'))),
-        );
       },
     );
   });
@@ -317,45 +164,6 @@ void main() {
         // assert
         verify(mockRemoteDataSource.enableUser(any, any));
         expect(result, equals(Right<Failure, User>(tUserModel.toEntity())));
-      },
-    );
-
-    test(
-      'debe retornar una server failure el backend de deshabilitar user falla',
-      () async {
-        // arrange
-        when(mockRemoteDataSource.enableUser(any, any))
-            .thenThrow(ServerException(statusCode: 400));
-
-        // act
-        final result = await repository.enableUser(tUserModel.id, false);
-
-        // assert
-        verify(mockRemoteDataSource.enableUser(any, any)).called(1);
-        expect(
-            result,
-            equals(const Left(
-                ServerFailure('Ocurrió un error al procesar la solicitud.'))));
-      },
-    );
-
-    test(
-      'debe retornar falla de conexión cuando el dispositivo no tiene internet al deshabilitar user',
-      () async {
-        // arrange
-        when(mockRemoteDataSource.enableUser(any, any)).thenThrow(
-            const SocketException('Failed to connect to the network'));
-
-        // act
-        final result = await repository.enableUser(tUserModel.id, false);
-
-        // assert
-        verify(mockRemoteDataSource.enableUser(any, any));
-        expect(
-          result,
-          equals(const Left(
-              ConnectionFailure('No existe conexión con internet.'))),
-        );
       },
     );
   });

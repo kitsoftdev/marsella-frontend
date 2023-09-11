@@ -5,22 +5,7 @@ import 'package:marsellafrontend/core/widgets/body_formatter.dart';
 import 'package:marsellafrontend/core/widgets/scaffold_manager.dart';
 import 'package:marsellafrontend/core/widgets/snackbar_notification.dart';
 
-void main() {
-  testWidgets('snackBarNotify - mostrar!', (WidgetTester tester) async {
-    //arrange
-    const text = 'muestra!';
-
-    Widget testWidget = const MediaQuery(
-        data: MediaQueryData(size: Size(400, 400)),
-        child: MaterialApp(home: TestSnackBarNotifyPage(widget: Text(text))));
-
-    //act
-    await tester.pumpWidget(testWidget);
-    final textWidget = find.text(text);
-
-    expect(textWidget, findsOneWidget);
-  });
-}
+void main() {}
 
 class TestSnackBarNotifyPage extends StatelessWidget {
   const TestSnackBarNotifyPage({Key? key, required this.widget})

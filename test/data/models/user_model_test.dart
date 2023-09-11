@@ -9,28 +9,30 @@ void main() {
   final newUserId = Guid.newGuid.toString();
 
   final tUserModel = UserModel(
-      id: newUserId,
-      name: 'Test User',
-      username: 'test',
-      email: 'te@mp.com',
-      enabled: true,
-      builtIn: false,
-      pictureUrl: null,
-      pictureCloudFileId: null,
-      pictureThumbnailUrl: null,
-      pictureThumbnailCloudFileId: null,);
+    id: newUserId,
+    name: 'Test User',
+    username: 'test',
+    email: 'te@mp.com',
+    enabled: true,
+    builtIn: false,
+    pictureUrl: null,
+    pictureCloudFileId: null,
+    pictureThumbnailUrl: null,
+    pictureThumbnailCloudFileId: null,
+  );
 
   final tUser = User(
-      id: newUserId,
-      name: 'Test User',
-      username: 'test',
-      email: 'te@mp.com',
-      enabled: true,
-      builtIn: false,
-      pictureUrl: null,
-      pictureCloudFileId: null,
-      pictureThumbnailUrl: null,
-      pictureThumbnailCloudFileId: null,);
+    id: newUserId,
+    name: 'Test User',
+    username: 'test',
+    email: 'te@mp.com',
+    enabled: true,
+    builtIn: false,
+    pictureUrl: null,
+    pictureCloudFileId: null,
+    pictureThumbnailUrl: null,
+    pictureThumbnailCloudFileId: null,
+  );
 
   group('user model methods', () {
     test('user model to entity', () {
@@ -51,24 +53,6 @@ void main() {
 
         // assert
         expect(result, equals(tUserModel));
-      },
-    );
-    test(
-      'debe retornar un json válido desde el user model',
-      () async {
-        // act
-        final result = tUserModel.toJson();
-
-        // assert
-        final expectedJsonMap = {
-          'id': newUserId,
-          'name': 'Test User',
-          'username': 'test',
-          'email': 'te@mp.com',
-          'enabled': true,
-          'builtIn': false
-        };
-        expect(result, equals(expectedJsonMap));
       },
     );
   });

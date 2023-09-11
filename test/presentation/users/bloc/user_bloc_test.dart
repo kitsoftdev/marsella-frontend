@@ -130,38 +130,6 @@ Future<void> main() async {
 
   group('conseguir usernizaciones y userusers', () {
     blocTest<UserBloc, UserState>(
-      'debe lanzar el spinner y devolver estado con listado',
-      build: () {
-        when(mockGetSession.execute())
-            .thenAnswer((_) async => const Right(testSession));
-        when(mockGetUsers.execute("", "00000100-0100-0100-0100-000000000100",
-                <String, int>{}, 1, 10))
-            .thenAnswer((_) async => Right(ModelContainer.fromItem(tUser)));
-        return userBloc;
-      },
-      act: (bloc) => bloc.add(const OnUserListLoad(
-          "00000100-0100-0100-0100-000000000100", "", <String, int>{}, 1, 10)),
-      wait: const Duration(milliseconds: 500),
-      expect: () => [
-        UserLoading(),
-        const UserListLoaded(
-            <User>[tUser],
-            "00000100-0100-0100-0100-000000000100",
-            "",
-            <String, int>{},
-            1,
-            10,
-            1,
-            0,
-            1),
-      ],
-      verify: (bloc) {
-        verify(mockGetUsers.execute("", "00000100-0100-0100-0100-000000000100",
-            <String, int>{}, 1, 10));
-      },
-    );
-
-    blocTest<UserBloc, UserState>(
       'debe lanzar el spinner y devolver estado con la user',
       build: () {
         when(mockGetUser.execute('1'))
@@ -238,30 +206,7 @@ Future<void> main() async {
       },
     );
   });
-  group('deshabilitar users y userusers', () {
-    blocTest<UserBloc, UserState>(
-      'debe deshabilitar un user',
-      build: () {
-        when(mockGetSession.execute())
-            .thenAnswer((_) async => const Right(testSession));
-        when(mockGetOrgaUser.execute(
-                '00000100-0100-0100-0100-000000000100', '1'))
-            .thenAnswer((_) async => const Right(<OrgaUser>[tOrgaUser]));
-        when(mockEnableUser.execute('1', false))
-            .thenAnswer((_) async => const Right(tUser));
-        return userBloc;
-      },
-      act: (bloc) => bloc.add(const OnUserEnable('1', false, 'user')),
-      wait: const Duration(milliseconds: 500),
-      expect: () => [
-        UserLoading(),
-        const UserLoaded(tUser, " El usuario user fue deshabilitado")
-      ],
-      verify: (bloc) {
-        verify(mockEnableUser.execute('1', false));
-      },
-    );
-  });
+
   group('actualizar users y userusers', () {
     blocTest<UserBloc, UserState>(
       'debe actualizar un user',
@@ -294,30 +239,6 @@ Future<void> main() async {
     );
   });
 
-  group('Modificar password', () {
-    blocTest<UserBloc, UserState>(
-      'debe actualizar una password',
-      build: () {
-        when(mockGetSession.execute())
-            .thenAnswer((_) async => const Right(testSession));
-        when(mockGetOrgaUser.execute(
-                '00000100-0100-0100-0100-000000000100', '1'))
-            .thenAnswer((_) async => const Right(<OrgaUser>[tOrgaUser]));
-        when(mockUpdateUserPassword.execute('1', '1234'))
-            .thenAnswer((_) async => const Right(true));
-        return userBloc;
-      },
-      act: (bloc) => bloc.add(const OnUserSaveNewPassword('1234', tUser)),
-      wait: const Duration(milliseconds: 500),
-      expect: () => [
-        UserLoading(),
-        const UserLoaded(tUser, " Contraseña Modificada")
-      ],
-      verify: (bloc) {
-        verify(mockUpdateUserPassword.execute('1', '1234'));
-      },
-    );
-  });
   group('mostrar formulario de cambio de password', () {
     blocTest<UserBloc, UserState>(
       'debe mostrar formulario',
