@@ -1,0 +1,107 @@
+# This workflow will build and push a web application to an Azure Static Web App when you change your code.
+#
+# This workflow assumes you have already created the target Azure Static Web App.
+# For instructions see https://docs.microsoft.com/azure/static-web-apps/get-started-portal?tabs=vanilla-javascript
+#
+# To configure this workflow:
+#
+# 1. Set up a secret in your repository named AZURE_STATIC_WEB_APPS_API_TOKEN with the value of your Static Web Apps deployment token.
+#    For instructions on obtaining the deployment token see: https://docs.microsoft.com/azure/static-web-apps/deployment-token-management
+#
+# 3. Change the values for the APP_LOCATION, API_LOCATION and APP_ARTIFACT_LOCATION, AZURE_STATIC_WEB_APPS_API_TOKEN environment variables (below). 1
+#    For instructions on setting up the appropriate configuration values go to https://docs.microsoft.com/azure/static-web-apps/front-end-frameworks
+name: Deploy flutter web Marsella App to Azure SWA
+
+on:
+  push:
+    branches: [ "develop" ]
+
+# Environment variables available to all jobs and steps in this workflow
+env:
+  APP_LOCATION: "./" # location of your client code
+  APP_ARTIFACT_LOCATION: "build/web" # location of client code build output
+  AZURE_STATIC_WEB_APPS_API_TOKEN: ${{ secrets.FEAT_MARSELLA_STATIC_WEB_TOKEN }} # secret containing deployment token for your static web app
+  URL_BACKEND: ${{ secrets.FEAT_MARSELLA_URL_BACKEND }}
+
+permissions:
+  contents: read
+
+jobs:
+  slackNotification1:
+    name: Deploy start Notification
+    runs-on: ubuntu-latest
+    if: ${{ always() }}
+    steps:
+    - uses: actions/checkout@v2
+    - name: Slack deploy front Notification
+      uses: rtCamp/action-slack-notify@v2.2.0
+      env:
+        SLACK_COLOR: '#FFFFFF'
+        SLACK_ICON: https://github.com/rtCamp.png?size=48
+        SLACK_MESSAGE: 'Comienza despliegue Marsella en DEVELOP'
+        SLACK_TITLE: Deploy Marsella Front DEVELOP
+        SLACK_USERNAME: github      
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}  
+  build_and_deploy_job:
+    env:
+      AZURE_APP_NAME: marsella-features-frontend
+    permissions:
+      contents: read # for actions/checkout to fetch code
+      pull-requests: write # for Azure/static-web-apps-deploy to comment on PRs
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+    runs-on: ubuntu-latest
+    needs: slackNotification1    
+    name: Build and Deploy Job
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v1
+        with:
+          channel: beta
+      - name: Build the Flutter Web App
+        run: flutter build web --no-tree-shake-icons --dart-define=API_BASE_URL=${{ env.URL_BACKEND }} 
+      - name: Build And Deploy
+        id: builddeploy
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ env.AZURE_STATIC_WEB_APPS_API_TOKEN }} # secret containing api token for app
+          action: "upload"
+          ###### Repository/Build Configurations - These values can be configured to match you app requirements. ######
+          # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
+          app_location: ${{ env.APP_LOCATION }}
+          app_artifact_location: ${{ env.APP_ARTIFACT_LOCATION }}
+          ###### End of Repository/Build Configurations ######
+
+  slackNotification2:
+    name: Front Deploy finish Notification
+    runs-on: ubuntu-latest
+    if: ${{ always() }}
+    needs: build_and_deploy_job
+    steps:
+    - uses: actions/checkout@v2
+    - name: Slack front deploy finish Notification 
+      uses: rtCamp/action-slack-notify@v2.2.0
+      env:
+        SLACK_COLOR: ${{ job.status }}
+        SLACK_ICON: https://github.com/rtCamp.png?size=48
+        SLACK_MESSAGE: 'Término despliegue Marsella en DEVELOP en https://yellow-island-0186d1f0f.3.azurestaticapps.net'
+        SLACK_TITLE: Deploy Marsella DEVELOP
+        SLACK_USERNAME: github      
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+
+  close_pull_request_job:
+    permissions:
+      contents: none
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    name: Close Pull Request Job
+    steps:
+      - name: Close Pull Request
+        id: closepullrequest
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ env.AZURE_STATIC_WEB_APPS_API_TOKEN }} # secret containing api token for app
+          action: "close"
