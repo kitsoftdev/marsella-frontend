@@ -81,7 +81,7 @@ class _MarsellaApp extends State<MarsellaApp> {
         BlocProvider(create: (_) => di.locator<ScrollLiveCubit>()),
       ],
       child: MaterialApp(
-        title: 'Marsella.com',
+        title: 'Marsella',
         home: Builder(builder: (context) {
           //context.read<SessionLiveCubit>().readSession();
           final shThemeDataAll = MarsellaTheme.of(context);

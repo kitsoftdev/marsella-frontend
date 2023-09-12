@@ -16,19 +16,4 @@ Future<void> main() async {
   });
 
   const NavItem destination = NavItem.pageUsers;
-
-/*
-  blocTest<NavBloc, NavState>(
-    'debe emitir NavState',
-    build: () {
-      when(navBloc.state).thenReturn(const NavState(NavItem.pageRecent));
-      return navBloc;
-    },
-    act: (bloc) {
-      bloc.add(NavigateTo(destination, mockContext));
-    },
-    wait: const Duration(milliseconds: 500),
-    expect: () => [const NavState(destination)],
-  );
-  */
 }
